@@ -45,11 +45,11 @@ const CourseEditor = (props) => {
 
     isCreating
       ? createCourse({
-          variables: { name: name },
-          update: (cache, result) => {
-            syncCacheOnCreate(cache, result.data.createCourse)
-          }
-        })
+        variables: { name: name },
+        update: (cache, result) => {
+          syncCacheOnCreate(cache, result.data.createCourse)
+        }
+      })
       : updateCourse({
         variables: { id: params.id, name: name },
         update: (cache, result) => {

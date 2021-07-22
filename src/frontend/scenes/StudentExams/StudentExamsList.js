@@ -315,6 +315,7 @@ const StudentExamsList = (props) => {
               value={filters.selectedCourse}
               options={courses}
               isDisabled={fetchingCourses}
+              placeholder={formatMessage({ id: 'select_option' })}
               onChange={(option) => {
                 const selected = courses.find(x => x.value === option.value)
                 setFilters({ selectedCourse: selected, selectedStudent: '' })
@@ -331,6 +332,7 @@ const StudentExamsList = (props) => {
               value={filters.selectedStudent}
               options={students}
               isDisabled={fetchingCognitoUsers || !filters.selectedCourse}
+              placeholder={formatMessage({ id: 'select_option' })}
               onChange={(option) => {
                 const selected = students.find(x => x.value === option.value)
                 setFilters({ ...filters, selectedStudent: selected })

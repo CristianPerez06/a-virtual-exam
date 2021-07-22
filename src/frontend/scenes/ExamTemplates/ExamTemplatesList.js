@@ -108,6 +108,7 @@ const ExamTemplatesList = (props) => {
                 value={filters.selectedCourse}
                 options={courses}
                 isDisabled={fetchingCourses}
+                placeholder={formatMessage({ id: 'select_option' })}
                 onChange={(option) => {
                   const selected = courses.find(x => x.value === option.value)
                   setFilters({ selectedCourse: selected })

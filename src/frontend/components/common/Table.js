@@ -1,5 +1,6 @@
 import React from 'react'
 import styled from 'styled-components'
+import { Button } from 'reactstrap'
 import { useTable, usePagination } from 'react-table'
 
 const Styles = styled.div`
@@ -7,7 +8,6 @@ const Styles = styled.div`
   font-size: 0.9rem;
 
   table {
-    table-layout: fixed;
     width: 100%;
     border-spacing: 0;
     border: 1px solid black;
@@ -103,34 +103,34 @@ const Table = (props) => {
         </table>
         {paginationEnabled && (
           <div className='pagination d-flex justify-content-center'>
-            <button
+            <Button
               onClick={() => gotoPage(0)} disabled={!canPreviousPage}
             >
               {'<<'}
-            </button>
+            </Button>
             &nbsp;
-            <button
+            <Button
               onClick={() => previousPage()}
               disabled={!canPreviousPage}
             >
               {'<'}
-            </button>
+            </Button>
             &nbsp;
-            <button
+            <Button
               onClick={() => nextPage()}
               disabled={!canNextPage}
             >
               {'>'}
-            </button>
+            </Button>
             &nbsp;
-            <button
+            <Button
               onClick={() => gotoPage(pageCount - 1)}
               disabled={!canNextPage}
             >
               {'>>'}
-            </button>
+            </Button>
             &nbsp;
-            <span>
+            <span className='mt-2'>
               &nbsp;
               Page
               &nbsp;

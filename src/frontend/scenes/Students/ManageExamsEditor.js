@@ -91,7 +91,7 @@ const ManageExamsEditor = (props) => {
 
   // Handlers
   const onSuccess = (result) => {
-    setFilters({ ...filters, selectedExamTemplate: '' })
+    setFilters({ ...filters, selectedExamTemplate: null })
     setInitialValues({})
   }
 
@@ -141,6 +141,8 @@ const ManageExamsEditor = (props) => {
     {
       variables: { courseId: (filters.selectedCourse || {}).value },
       skip: !(filters.selectedCourse || {}).value,
+      fetchPolicy: 'network-only',
+
       onCompleted: onFetchValidExamTemplatesSuccess,
       onError
     }
@@ -326,6 +328,7 @@ const ManageExamsEditor = (props) => {
                     value={filters.selectedStudent}
                     options={students}
                     isDisabled={params.idNumber || fetchingCognitoUsers}
+                    placeholder={formatMessage({ id: 'select_option' })}
                     onChange={(option) => {
                       const selected = students.find(x => x.value === option.value)
                       setFilters({ selectedStudent: selected })
@@ -347,7 +350,7 @@ const ManageExamsEditor = (props) => {
                     validations={required}
                     selectedValue={(filters.selectedCourse || {}).value}
                     handleOnChange={(selectedOption) => {
-                      setFilters({ ...filters, selectedCourse: selectedOption, selectedExamTemplate: {} })
+                      setFilters({ ...filters, selectedCourse: selectedOption, selectedExamTemplate: null })
                     }}
                   />
                 </div>
@@ -384,7 +387,7 @@ const ManageExamsEditor = (props) => {
                   <Button
                     color='primary'
                     type='submit'
-                    disabled={creating || fetchingCourses || fetchingValidExamTemplates || pristine}
+                    disabled={creating || fetchingCourses || fetchingValidExamTemplates || !filters.selectedExamTemplate || pristine}
                   >
                     <FormattedMessage id='button.assign_exam' />
                     {creating && <LoadingInline className='ml-3' />}

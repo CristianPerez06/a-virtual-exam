@@ -94,12 +94,12 @@ const ExercisesEditor = (props) => {
     const { name, courseId, unitId } = values
     isCreating
       ? createExercise({
-          variables: { name: name, courseId: courseId, unitId: unitId },
-          update: (cache, result) => {
-            const variables = { courseId: courseId, unitId: unitId }
-            syncCacheOnCreate(cache, result.data.createExercise, variables)
-          }
-        })
+        variables: { name: name, courseId: courseId, unitId: unitId },
+        update: (cache, result) => {
+          const variables = { courseId: courseId, unitId: unitId }
+          syncCacheOnCreate(cache, result.data.createExercise, variables)
+        }
+      })
       : updateExercise({
         variables: { id: params.id, name: name, courseId: courseId, unitId: unitId },
         update: (cache, result) => {
@@ -162,7 +162,9 @@ const ExercisesEditor = (props) => {
   }
 
   const onCancelSelectImageClick = () => {
-    setShowImageUploader(false)
+    // Show image uploader if question doesn't have any image description
+    const exerciseHasDescriptionUrl = !!initialValues.descriptionUrl
+    setShowImageUploader(!exerciseHasDescriptionUrl)
   }
 
   // Other

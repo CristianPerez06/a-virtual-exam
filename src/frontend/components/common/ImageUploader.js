@@ -134,8 +134,8 @@ const ImageUploader = (props) => {
                 ))}
               </div>
               <div className='col-md-2 col-xs-12'>
-                <div className='row text-center'>
-                  <div className='col-md-12 col-xs-12'>
+                <div className='row d-flex justify-content-between'>
+                  <div className='col-md-12 col-sm-3'>
                     <Button
                       color='outline-secondary'
                       className='m-1'
@@ -146,7 +146,7 @@ const ImageUploader = (props) => {
                       <FaFileImport />
                     </Button>
                   </div>
-                  <div className='col-md-12 col-xs-12'>
+                  <div className='col-md-12 col-sm-3'>
                     <Button
                       color='outline-danger'
                       className='m-1'
@@ -157,7 +157,7 @@ const ImageUploader = (props) => {
                       <FaTrash />
                     </Button>
                   </div>
-                  <div className='col-md-12 col-xs-12'>
+                  <div className='col-md-12 col-sm-3'>
                     <Button
                       color='outline-success'
                       className='m-1'
@@ -169,7 +169,7 @@ const ImageUploader = (props) => {
                       {uploading && <LoadingInline color='success' className='ml-3' />}
                     </Button>
                   </div>
-                  <div className='col-md-12 col-xs-12'>
+                  <div className='col-md-12 col-sm-3'>
                     <Button
                       color='outline-dark'
                       className='m-1'
