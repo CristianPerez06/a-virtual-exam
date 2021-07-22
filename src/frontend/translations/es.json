@@ -157,6 +157,7 @@
   "metrics": "Metricas",
   "metrics_top_exams_per_course": "Examenes mas rendidos por materia",
   "metrics_top_exams_passed_failed_per_course": "Examenes mas rendidos (aprobados/reprobados) por materia",
+  "metrics_error": "Ocurrio un error intentando obtener los datos de las Metricas",
 
   "report_filename": "Reporte",
   "report_id": "Identificador",
@@ -164,7 +165,7 @@
   "report_exams_total": "Total de examenes",
   "report_high_approval_exercise": "Ejercicio con mas respuestas correctas",
   "report_low_approval_exercise": "Ejercicio con menos respuestas correctas",
-  "report_total_passed_exams": "Total exemenes aprobados",
+  "report_total_passed_exams": "Total examenes aprobados",
   "report_total_failed_exams": "Total examenes reprobados",
   "report_avg_passed_exams": "Porcentaje de aprobados",
   "report_avg_failed_exams": "Porcentaje de reprobados",
@@ -203,6 +204,8 @@
   "passed": "Aprobados",
   "failed": "Reprobados",
   "select_option": "Seleccione opción",
+  "page": "Pagina",
+  "of": "de",
 
   "language.spanish": "Español",
   "language.english": "Ingles"

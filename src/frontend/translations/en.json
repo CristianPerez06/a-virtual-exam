@@ -157,6 +157,7 @@
   "metrics": "Metrics",
   "metrics_top_exams_per_course": "Top exams per course",
   "metrics_top_exams_passed_failed_per_course": "Top exams passed/failed per course",
+  "metrics_error": "An error has ocurred trying to fetch the Metrics data",
 
   "report_filename": "Report",
   "report_id": "Id",
@@ -203,6 +204,8 @@
   "passed": "Passed",
   "failed": "Failed",
   "select_option": "Select option",
+  "page": "Page",
+  "of": "of",
 
   "language.spanish": "Spanish",
   "language.english": "English"

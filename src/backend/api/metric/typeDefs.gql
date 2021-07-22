@@ -1,0 +1,50 @@
+type ExamMetric {
+  courseId: ID!
+  courseName: String!
+  total: Int!
+  totalPassed: Int!
+  totalFailed: Int!
+}
+
+type ExamMetrics {
+  data: [ExamMetric]
+  count: Int!
+}
+
+# TO DO - Reuse Exam types
+type ReportExamExerciseAnswer {
+  _id: ID!
+  name: String!,
+  correct: Boolean
+  selected: Boolean
+}
+
+type ReportExamExercise {
+  _id: ID!
+  name: String!
+  answers: [ReportExamExerciseAnswer]!
+}
+
+type ReportExam {
+  id: String,
+  name: String,
+  total: Int,
+  totalPassedExams: Int,
+  totalFailedExams: Int,
+  avgScore: Float
+  avgPassedExams: Float,
+  avgFailedExams: Float,
+  maxScore: Float,
+  minScore: Float,
+  exercises: [ReportExamExercise]
+}
+
+type ReportExams {
+  data: [ReportExam]
+  count: Int!
+}
+
+extend type Query {
+  getExamMetrics(dateFrom: String!, dateTo: String!): ExamMetrics
+  getExamsReportData(dateFrom: String!, dateTo: String!): ReportExams
+}

@@ -6,7 +6,7 @@ import { LIST_COURSES } from '../../common/requests/courses'
 import { LIST_UNITS } from '../../common/requests/units'
 import { LIST_EXERCISES, DISABLE_EXERCISE } from '../../common/requests/exercises'
 import { useQuery, useMutation } from '@apollo/react-hooks'
-import { TranslatableErrors, DeleteModal, TwoColumnsTable, LoadingInline } from '../../components/common'
+import { DeleteModal, TwoColumnsTable, LoadingInline } from '../../components/common'
 import { syncCacheOnDelete } from './cacheHelpers'
 import { getTranslatableErrors } from '../../common/graphqlErrorHandlers'
 import { useAlert } from '../../hooks'
@@ -23,7 +23,6 @@ const ExercisesList = (props) => {
   const [courses, setCourses] = useState([])
   const [units, setUnits] = useState([])
   const [exercises, setExercises] = useState([])
-  const [errors, setErrors] = useState()
   const [filters, setFilters] = useState({ selectedCourse: null, selectedUnit: null })
   const [exerciseToDelete, setExerciseToDelete] = useState()
   const [deleteModalIsOpen, setDeleteModalIsOpen] = useState(false)
@@ -87,7 +86,6 @@ const ExercisesList = (props) => {
 
   // Other
   const stateCleanupOnDelete = () => {
-    setErrors()
     setDeleteModalIsOpen(false)
     alertSuccess(formatMessage({ id: 'exercise_deleted' }))
   }
@@ -195,7 +193,6 @@ const ExercisesList = (props) => {
 
         </CardBody>
       </Card>
-      {errors && <TranslatableErrors errors={errors} />}
     </div>
   )
 }
