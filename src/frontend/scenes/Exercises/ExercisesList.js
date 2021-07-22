@@ -142,6 +142,7 @@ const ExercisesList = (props) => {
                 value={filters.selectedCourse}
                 options={courses}
                 isDisabled={fetchingCourses}
+                placeholder={formatMessage({ id: 'select_option' })}
                 onChange={(option) => {
                   const selected = courses.find(x => x.value === option.value)
                   setFilters({ selectedCourse: selected, selectedUnit: null })
@@ -160,6 +161,7 @@ const ExercisesList = (props) => {
                 value={filters.selectedUnit}
                 options={units}
                 isDisabled={fetchingUnits}
+                placeholder={formatMessage({ id: 'select_option' })}
                 onChange={(option) => {
                   const selected = units.find(x => x.value === option.value)
                   setFilters({ ...filters, selectedUnit: selected })

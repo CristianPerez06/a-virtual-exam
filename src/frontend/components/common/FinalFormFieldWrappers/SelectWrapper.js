@@ -15,6 +15,7 @@ const SelectWrapper = (props) => {
     handleOnChange,
     intl
   } = props
+  const { formatMessage } = intl
 
   const mappedOptions = options.map((option) => {
     return {
@@ -32,6 +33,7 @@ const SelectWrapper = (props) => {
             value={mappedSelectedValue || ''}
             options={mappedOptions}
             isDisabled={isDisabled}
+            placeholder={formatMessage({ id: 'select_option' })}
             onChange={(x) => {
               handleOnChange(x)
               input.onChange(x.value)

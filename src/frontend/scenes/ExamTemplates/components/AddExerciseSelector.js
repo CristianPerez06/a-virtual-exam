@@ -56,6 +56,7 @@ const AddExerciseSelector = (props) => {
       update: (cache, result) => {
         const variables = { id: examTemplateId }
         syncCacheOnAddTemplateExercise(cache, result.data.addExerciseToExamTemplate, variables)
+        setSelectedExercise()
       }
     })
   }
@@ -84,9 +85,10 @@ const AddExerciseSelector = (props) => {
       <div className='row'>
         <div className='col-md-9 col-xs-12'>
           <Select
-            value={selectedExercise}
+            value={selectedExercise || ''}
             options={exercises}
             isDisabled={fetchingValidExercises || addingExerciseToTemplate}
+            placeholder={formatMessage({ id: 'select_option' })}
             onChange={(option) => {
               const selected = exercises.find(x => x.value === option.value)
               setSelectedExercise(selected)

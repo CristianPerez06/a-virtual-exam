@@ -20,6 +20,7 @@
   "common_error.duplicated_entity": "Ya existe una entidad con el mismo nombre",
   "common_error.couldnt_upload_image": "Ocurrio un error al intentar subir la imagen.",
   "common_error.selected_valid_dates": "Debe seleccionar fechas validas",
+  "common_error.couldnt_generate_report": "Ha ocurrido un error al intentar generar el reporte.",
 
   "entity_error.correct_answer_already_selected": "Ya existe una respuesta correcta.",
   "entity_error.related_entity_exists": "Antes de eliminar esta entidad necesita eliminar las entidades relacionadas.",
@@ -91,6 +92,7 @@
   "button.details": "Detalles",
   "button.edit_points": "Puntaje",
   "button.metrics": "Metrics",
+  "button.generate_report": "Generar reporte",
 
   "course_name": "Nombre del curso",
   "course_created": "Curso creado exitosamente",
@@ -156,6 +158,18 @@
   "metrics_top_exams_per_course": "Examenes mas rendidos por materia",
   "metrics_top_exams_passed_failed_per_course": "Examenes mas rendidos (aprobados/reprobados) por materia",
 
+  "report_filename": "Reporte",
+  "report_id": "Identificador",
+  "report_title": "Titulo",
+  "report_exams_total": "Total de examenes",
+  "report_high_approval_exercise": "Ejercicio con mas respuestas correctas",
+  "report_low_approval_exercise": "Ejercicio con menos respuestas correctas",
+  "report_total_passed_exams": "Total exemenes aprobados",
+  "report_total_failed_exams": "Total examenes reprobados",
+  "report_avg_passed_exams": "Porcentaje de aprobados",
+  "report_avg_failed_exams": "Porcentaje de reprobados",
+  "report_avg_score": "Nota promedio",
+
   "registration_completed": "Registro exitoso",
   "first_name": "Nombre",
   "last_name": "Apellido",
@@ -188,6 +202,7 @@
   "date_to": "Fecha hasta",
   "passed": "Aprobados",
   "failed": "Reprobados",
+  "select_option": "Seleccione opción",
 
   "language.spanish": "Español",
   "language.english": "Ingles"

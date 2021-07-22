@@ -1,6 +1,6 @@
 import React, { useState } from 'react'
 import { Card, CardBody, CardHeader, Button } from 'reactstrap'
-import { Link } from 'react-router-dom'
+import { useHistory, Link } from 'react-router-dom'
 import { injectIntl, FormattedMessage } from 'react-intl'
 import { LIST_ASSIGNED_EXAMS } from '../../common/requests/assignedExams'
 import { CREATE_EXAM, LIST_EXAMS } from '../../common/requests/exams'
@@ -25,6 +25,9 @@ const ExamsList = (props) => {
   const [confirmModalIsOpen, setConfirmModalIsOpen] = useState(false)
   const [filters, setFilters] = useState({})
 
+  // Hooks
+  const history = useHistory()
+
   // Button handlers
   const onStartClicked = (values) => {
     const { id, examTemplateId } = values
@@ -47,9 +50,10 @@ const ExamsList = (props) => {
 
         setAssignedExams(updatedAssignedExamsList.data)
         setExams(updatedExamsList.data)
+        setConfirmModalIsOpen(false)
+        history.push({ pathname: `/exams/${result.data.createExam.id}`})
       }
     })
-    setConfirmModalIsOpen(false)
   }
 
   const onCancelClicked = () => {

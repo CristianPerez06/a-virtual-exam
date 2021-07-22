@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react'
 import { Form, Field } from 'react-final-form'
-import { useRouteMatch } from 'react-router-dom'
+import { useHistory, useRouteMatch } from 'react-router-dom'
 import { useQuery, useMutation } from '@apollo/react-hooks'
 import { ButtonSubmit, ButtonGoTo, FieldWrapper, TranslatableTitle, ImageUploader } from '../../components/common'
 import VisualDescription from './components/VisualDescription'
@@ -15,7 +15,6 @@ const AnswersEditor = (props) => {
   // Props and params
   const { isCreating, intl } = props
   const { formatMessage } = intl
-  const { params } = useRouteMatch()
 
   // State
   const [initialValues, setInitialValues] = useState({})
@@ -23,10 +22,12 @@ const AnswersEditor = (props) => {
   const [descriptionImage, setDescriptionImage] = useState(true)
 
   // Hooks
+  const { params } = useRouteMatch()
+  const history = useHistory()
   const { alertSuccess, alertError } = useAlert()
 
   // Handlers
-  const onFetchAnsewerSuccess = (data) => {
+  const onFetchAnswerSuccess = (data) => {
     if (!data) return
     const answer = { ...data.getAnswer }
     setInitialValues(answer)
@@ -38,7 +39,9 @@ const AnswersEditor = (props) => {
 
   const onSuccess = (result) => {
     if (isCreating) {
+      const { exerciseId, id } = result.createAnswer
       alertSuccess(formatMessage({ id: 'answer_created' }))
+      history.push({ pathname: `/exercises/${exerciseId}/answers/${id}`, state: { isCreating: false } })
     } else {
       alertSuccess(formatMessage({ id: 'answer_updated' }))
     }
@@ -55,12 +58,12 @@ const AnswersEditor = (props) => {
 
     isCreating
       ? createAnswer({
-          variables: { name, description, correct, exerciseId: params.exerciseId },
-          update: (cache, result) => {
-            const variables = { exerciseId: params.exerciseId }
-            syncAnswersCacheOnCreate(cache, result.data.createAnswer, variables)
-          }
-        })
+        variables: { name, description, correct, exerciseId: params.exerciseId },
+        update: (cache, result) => {
+          const variables = { exerciseId: params.exerciseId }
+          syncAnswersCacheOnCreate(cache, result.data.createAnswer, variables)
+        }
+      })
       : updateAnswer({
         variables: { id: params.answerId, name, description, correct, exerciseId: params.exerciseId },
         update: (cache, result) => {
@@ -86,7 +89,9 @@ const AnswersEditor = (props) => {
   }
 
   const onCancelSelectImageClick = () => {
-    setShowImageUploader(false)
+    // Show image uploader if answer doesn't have any image description
+    const exerciseHasDescriptionUrl = !!initialValues.descriptionUrl
+    setShowImageUploader(!exerciseHasDescriptionUrl)
   }
 
   // Queries and mutations
@@ -95,7 +100,7 @@ const AnswersEditor = (props) => {
     {
       variables: { id: params.answerId },
       skip: isCreating,
-      onCompleted: onFetchAnsewerSuccess,
+      onCompleted: onFetchAnswerSuccess,
       onError
     }
   )

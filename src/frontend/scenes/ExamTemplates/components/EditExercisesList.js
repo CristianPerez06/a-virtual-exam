@@ -231,17 +231,16 @@ const EditExercisesList = (props) => {
       </div>
 
       {/* Edit points modal */}
-      <div id='edit-points-modal'>
-        <EditPointsModal
-          points={(exerciseToEditNote || {}).points}
-          modalIsOpen={editPointsModalIsOpen}
-          headerTextId='common_title.edit_points'
-          buttonTextId='button.confirm'
-          buttonColor='success'
-          onCloseClick={onCancelEditPointsClicked}
-          onConfirmClick={onConfirmEditPointsClicked}
-        />
-      </div>
+      {editPointsModalIsOpen && (
+        <div id='edit-points-modal'>
+          <EditPointsModal
+            points={(exerciseToEditNote || {}).points}
+            modalIsOpen={editPointsModalIsOpen}
+            onCloseClick={onCancelEditPointsClicked}
+            onConfirmClick={onConfirmEditPointsClicked}
+          />
+        </div>
+      )}
     </div>
   )
 }

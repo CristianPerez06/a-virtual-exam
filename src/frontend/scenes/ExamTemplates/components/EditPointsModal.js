@@ -9,32 +9,29 @@ const EditPointsModal = (props) => {
     points,
     modalIsOpen,
     isBussy,
-    headerTextId,
-    buttonTextId,
-    buttonColor,
     onCloseClick,
     onConfirmClick,
     intl
   } = props
 
+  // Props and params
   const { formatMessage } = intl
 
   // State
-  const [updatedPoints, setUpdatedPoints] = useState(0)
+  const [updatedPoints, setUpdatedPoints] = useState()
 
   useEffect(() => {
-    if (points) {
-      setUpdatedPoints(points)
-    }
+    const initialValue = points || 0
+    setUpdatedPoints(initialValue)
 
     // Cleanup state on unmount
-    return () => setUpdatedPoints(0)
+    return () => setUpdatedPoints()
   }, [points])
 
   return (
     <Modal isOpen={modalIsOpen} toggle={onCloseClick} disabled>
       <ModalHeader toggle={onCloseClick} disabled>
-        <FormattedMessage id={headerTextId} />
+        <FormattedMessage id='common_title.edit_points' />
       </ModalHeader>
       <ModalBody>
         <div className='d-flex justify-content-center'>
@@ -54,14 +51,14 @@ const EditPointsModal = (props) => {
       </ModalBody>
       <ModalFooter>
         <Button
-          color={buttonColor}
+          color='success'
           onClick={() => {
             const val = updatedPoints
             onConfirmClick(val)
           }}
           disabled={isBussy}
         >
-          <FormattedMessage id={buttonTextId} />
+          <FormattedMessage id='button.confirm' />
           {isBussy && <LoadingInline className='ml-3' />}
         </Button>
         <Button
