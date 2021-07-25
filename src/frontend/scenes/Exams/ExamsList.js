@@ -5,7 +5,8 @@ import { injectIntl, FormattedMessage } from 'react-intl'
 import { LIST_ASSIGNED_EXAMS } from '../../common/requests/assignedExams'
 import { CREATE_EXAM, LIST_EXAMS } from '../../common/requests/exams'
 import { useQuery, useMutation } from '@apollo/react-hooks'
-import { ModalWrapper, TranslatableErrors, LoadingInline, Table, NoResults } from '../../components/common'
+import { useAlert } from '../../hooks'
+import { ModalWrapper, LoadingInline, Table, NoResults } from '../../components/common'
 import { getTranslatableErrors } from '../../common/graphqlErrorHandlers'
 import { COOKIE_NAMES } from '../../common/constants'
 import { syncCacheOnCreate, syncCacheOnDeleteAssignedExam } from './cacheHelpers'
@@ -21,18 +22,17 @@ const ExamsList = (props) => {
   // State
   const [assignedExams, setAssignedExams] = useState([])
   const [exams, setExams] = useState([])
-  const [errors, setErrors] = useState()
   const [confirmModalIsOpen, setConfirmModalIsOpen] = useState(false)
   const [filters, setFilters] = useState({})
 
   // Hooks
   const history = useHistory()
+  const { alertError } = useAlert()
 
   // Button handlers
   const onStartClicked = (values) => {
     const { id, examTemplateId } = values
     setFilters({ assignedExamId: id, examTemplateId, idNumber })
-    setErrors()
     setConfirmModalIsOpen(true)
   }
 
@@ -50,8 +50,6 @@ const ExamsList = (props) => {
 
         setAssignedExams(updatedAssignedExamsList.data)
         setExams(updatedExamsList.data)
-        setConfirmModalIsOpen(false)
-        history.push({ pathname: `/exams/${result.data.createExam.id}`})
       }
     })
   }
@@ -59,13 +57,13 @@ const ExamsList = (props) => {
   const onCancelClicked = () => {
     // if (deleting) return
     setFilters({})
-    setErrors()
     setConfirmModalIsOpen(!confirmModalIsOpen)
   }
 
   // Handlers
   const onSuccess = (result) => {
-    setErrors()
+    setConfirmModalIsOpen(false)
+    history.push({ pathname: `/exams/${result.createExam.id}` })
   }
 
   const onFetchAssignedExamsSuccess = (result) => {
@@ -80,9 +78,9 @@ const ExamsList = (props) => {
 
   const onError = (err) => {
     const { graphQLErrors } = err
-    const translatableErrors = getTranslatableErrors(graphQLErrors)
-    setErrors(translatableErrors)
+    const translatableError = getTranslatableErrors(graphQLErrors)
     setConfirmModalIsOpen(false)
+    alertError(formatMessage({ id: translatableError.id }))
   }
 
   // Queries and mutations
@@ -144,7 +142,7 @@ const ExamsList = (props) => {
             }}
           >
             {columnsAssignedExamTranslations.start}
-            {creatingExam && <LoadingInline className='ml-3' />}
+            {creatingExam && (filters.assignedExamId === row.original.id) && <LoadingInline className='ml-3' />}
           </Button>
         </div>
       )
@@ -287,9 +285,6 @@ const ExamsList = (props) => {
 
         </CardBody>
       </Card>
-      <div id='info' className='d-flex justify-content-around mt-3 w-100'>
-        {errors && <TranslatableErrors errors={errors} className='ml-3' />}
-      </div>
     </div>
   )
 }

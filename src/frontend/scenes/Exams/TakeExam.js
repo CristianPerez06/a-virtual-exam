@@ -1,5 +1,5 @@
 import React, { useState } from 'react'
-import { useRouteMatch } from 'react-router-dom'
+import { useHistory, useRouteMatch } from 'react-router-dom'
 import { Button, Form, Label } from 'reactstrap'
 import { useQuery, useMutation } from '@apollo/react-hooks'
 import { Loading, ButtonGoTo, ModalWrapper, Timer } from '../../components/common'
@@ -25,11 +25,14 @@ const TakeExam = (props) => {
   const [finishConfirmModalIsOpen, setFinishConfirmModalIsOpen] = useState(false)
 
   // Hooks
-  const { alertSuccess, alertError } = useAlert()
+  const history = useHistory()
+  const { alertError } = useAlert()
 
   // Handlers
   const onSuccess = (result) => {
     setExamCompleted(true)
+    setFinishConfirmModalIsOpen(false)
+    history.push({ pathname: `/exams/${params.id}/details` })
   }
 
   const onFetchExamSuccess = (result) => {
@@ -43,17 +46,18 @@ const TakeExam = (props) => {
     alertError(formatMessage({ id: translatableError.id }))
   }
 
-  const onTimeExpired = () => {
+  const endExam = () => {
     finishExam({
       variables: { id: params.id, answerPerExerciseList: answerPerExerciseList },
       update: (cache, result) => {
         const variables = { idNumber: Cookies.get(COOKIE_NAMES.USER) }
         syncCacheOnFinishExam(cache, result.data.finishExam, variables)
-        setFinishConfirmModalIsOpen(false)
-
-        alertSuccess(formatMessage({ id: 'exams_finalized_successfully' }))
       }
     })
+  }
+
+  const onTimeExpired = () => {
+    endExam()
   }
 
   // Button handlers
@@ -73,16 +77,7 @@ const TakeExam = (props) => {
   }
 
   const onConfirmFinishClicked = () => {
-    finishExam({
-      variables: { id: params.id, answerPerExerciseList: answerPerExerciseList },
-      update: (cache, result) => {
-        const variables = { idNumber: Cookies.get(COOKIE_NAMES.USER) }
-        syncCacheOnFinishExam(cache, result.data.finishExam, variables)
-        setFinishConfirmModalIsOpen(false)
-
-        alertSuccess(formatMessage({ id: 'exams_finalized_successfully' }))
-      }
-    })
+    endExam()
   }
 
   // Queries and mutations
@@ -104,7 +99,7 @@ const TakeExam = (props) => {
       {!fetching && exam && (
         <Form>
           {/* Timer */}
-          {!examCompleted && <Timer startTime={new Date(exam.created)} minutesToExpire={EXAM_SETTINGS.MINUTES_TO_EXPIRATION} onTimeExpired={onTimeExpired} />}
+          {(!examCompleted && !exam.completed) && <Timer startTime={new Date(exam.created)} minutesToExpire={EXAM_SETTINGS.MINUTES_TO_EXPIRATION} onTimeExpired={onTimeExpired} />}
 
           {/* Exam name */}
           <Label className='h4 mb-4'>{exam.name}</Label>

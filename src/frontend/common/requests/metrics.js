@@ -15,3 +15,32 @@ export const GET_EXAM_METRICS = gql`
     }
   }
 `
+export const GET_EXAM_REPORTS_DATA = gql`
+  query getExamsReportData ($dateFrom: String!, $dateTo: String!) {
+    getExamsReportData(dateFrom: $dateFrom, dateTo: $dateTo) {
+      data {
+        id
+        name
+        total
+        totalPassedExams
+        totalFailedExams
+        avgScore
+        avgPassedExams
+        avgFailedExams
+        maxScore
+        minScore
+        exercises {
+          _id
+          name
+          answers {
+            _id
+            name
+            correct
+            selected
+          }
+        }
+      }
+      count
+    }
+  }
+`

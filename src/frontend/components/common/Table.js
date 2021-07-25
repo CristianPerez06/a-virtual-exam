@@ -1,5 +1,6 @@
 import React from 'react'
 import styled from 'styled-components'
+import { injectIntl, FormattedMessage } from 'react-intl'
 import { Button } from 'reactstrap'
 import { useTable, usePagination } from 'react-table'
 
@@ -132,11 +133,9 @@ const Table = (props) => {
             &nbsp;
             <span className='mt-2'>
               &nbsp;
-              Page
+              <FormattedMessage id='page' />
               &nbsp;
-              <strong>
-                {pageIndex + 1} of {pageOptions.length}
-              </strong>
+              <strong>{pageIndex + 1}</strong> <FormattedMessage id='of' /> <strong>{pageOptions.length}</strong>
               &nbsp;
             </span>
             {/*
@@ -162,4 +161,4 @@ const Table = (props) => {
   )
 }
 
-export default Table
+export default injectIntl(Table)
