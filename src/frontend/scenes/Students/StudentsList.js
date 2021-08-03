@@ -54,7 +54,6 @@ const StudentsList = (props) => {
 
   useEffect(() => {
     if (!fetchingCognitoUsers) {
-      debugger
       const mappedStudents = mapStudents(cognitoUsers)
       setStudents(mappedStudents)
     }
