@@ -26,32 +26,35 @@ const StudentsList = (props) => {
 
   const columns = React.useMemo(
     () => {
-      return [{
-        Header: columnTranslations.idNumber,
-        accessor: 'idNumber',
-        Cell: ({ row }) => row.values.idNumber
-      },
-      {
-        Header: columnTranslations.student,
-        accessor: 'completeName',
-        Cell: ({ row }) => row.values.completeName
-      },
-      {
-        Header: columnTranslations.action,
-        Cell: ({ row }) => (
-          <div className='d-flex justify-content-center'>
-            <Link to={`/students/manage-exams/${row.original.idNumber}`}>
-              <Button color='info'>{columnTranslations.manage}</Button>
-            </Link>
-          </div>
-        )
-      }]
+      return [
+        {
+          Header: columnTranslations.idNumber,
+          accessor: 'value',
+          Cell: ({ row }) => row.original.value
+        },
+        {
+          Header: columnTranslations.student,
+          accessor: 'label',
+          Cell: ({ row }) => row.original.label
+        },
+        {
+          Header: columnTranslations.action,
+          Cell: ({ row }) => (
+            <div className='d-flex justify-content-center'>
+              <Link to={`/students/manage-exams/${row.original.value}`}>
+                <Button color='info'>{columnTranslations.manage}</Button>
+              </Link>
+            </div>
+          )
+        }
+      ]
     },
     [columnTranslations]
   )
 
   useEffect(() => {
     if (!fetchingCognitoUsers) {
+      debugger
       const mappedStudents = mapStudents(cognitoUsers)
       setStudents(mappedStudents)
     }

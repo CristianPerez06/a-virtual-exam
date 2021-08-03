@@ -19,11 +19,9 @@ const useCognitoUsers = () => {
         setFetchingCognitoUsers(false)
       })
       .catch(err => {
+        setFetchingCognitoUsers(false)
         console.log(err)
         return []
-      })
-      .finally(() => {
-        setFetchingCognitoUsers(false)
       })
   }, [cognito])
 
