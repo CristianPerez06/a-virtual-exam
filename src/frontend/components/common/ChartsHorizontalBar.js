@@ -14,17 +14,19 @@ const ChartsHorizontalBar = (props) => {
         display: false
       }
     },
+    maintainAspectRatio: false,
     scales: {
-      xAxes: [{
+      x: {
         ticks: {
-          display: false
+          stepSize: 1
+          // display: false
         }
-      }]
+      }
     }
   }
 
   const showBar = ((chartData || {}).labels || []).length > 0
-  const style = showBar ? { minHeight: '200px' } : {}
+  const style = showBar ? { height: '280px' } : {}
 
   return (
     <div id={id} className='m-2 pt-3 text-left'>

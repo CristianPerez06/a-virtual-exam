@@ -132,10 +132,3 @@ const listener = app.listen(
     debug(`Server address: ${serverAddress}`)
   }
 )
-
-// app.listen(
-//   { port: 4000 },
-//   () => {
-//     debug(`🚀 Server ready at http://localhost:${4000}${server.graphqlPath}`)
-//   }
-// )

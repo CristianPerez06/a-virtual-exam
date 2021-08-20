@@ -380,7 +380,7 @@ const StudentExamsList = (props) => {
         />
       </div>
 
-      {/* Finish eexam modal */}
+      {/* Finish exam modal */}
       <div id='confirm-finish-modal'>
         <ModalWrapper
           modalIsOpen={finishConfirmModalIsOpen}

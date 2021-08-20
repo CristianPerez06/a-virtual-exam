@@ -1,24 +1,26 @@
 import React, { useState } from 'react'
 import { useHistory } from 'react-router-dom'
 import { injectIntl } from 'react-intl'
-import { COGNITO_ERROR_CODES, ACCOUNT_ACTION_TYPES } from '../../common/constants'
-import { CustomAlert } from '../../components/common'
-import { useQueryParams, useAuthContext } from '../../hooks'
+import { ACCOUNT_ACTION_TYPES } from '../../common/constants'
+import { useQueryParams, useAuthContext, useAlert } from '../../hooks'
 import PasswordChangeForm from './components/PasswordChangeForm'
+import { getTranslatableErrors } from '../../common/cognitoErrorHandlers'
 
 const PasswordChange = (props) => {
-  // props
+  // Props and params
+  const { intl } = props
+  const { formatMessage } = intl
   const queryParams = useQueryParams()
   const id = queryParams.get('id')
   const email = queryParams.get('email')
 
-  // state
+  // State
   const [isLoading, setIsLoading] = useState(false)
-  const [error, setError] = useState('')
 
-  // hooks
+  // Hooks
   const { dispatch, cognito } = useAuthContext()
   const history = useHistory()
+  const { alertError } = useAlert()
 
   // handlers
   const onSuccess = (data) => {
@@ -34,14 +36,8 @@ const PasswordChange = (props) => {
 
   const onError = (err) => {
     const { code } = err
-    switch (code) {
-      case COGNITO_ERROR_CODES.NOT_AUTHORIZED:
-        setError({ id: 'cognito_error.not_authorized_exception' })
-        break
-      default:
-        setError({ id: 'common_error.internal_server_error' })
-        break
-    }
+    const translatableError = getTranslatableErrors(code)
+    alertError(formatMessage({ id: translatableError.id }))
     setIsLoading(false)
   }
 
@@ -58,10 +54,6 @@ const PasswordChange = (props) => {
     <div className='password-change d-flex justify-content-center row text-center'>
       <div className='password-change-form bg-light col-md-12 col-xs-12'>
         <PasswordChangeForm isLoading={isLoading} idNumber={id} email={email} onSubmit={onSubmit} />
-      </div>
-
-      <div className='info pt-3 col-md-12 col-xs-12'>
-        {!isLoading && error && <CustomAlert messages={error} />}
       </div>
     </div>
   )
