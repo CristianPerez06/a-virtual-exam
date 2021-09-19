@@ -1,59 +1,50 @@
 import React, { useState } from 'react'
 import { Link } from 'react-router-dom'
 import { injectIntl, FormattedMessage } from 'react-intl'
-import { COGNITO_ERROR_CODES } from '../../common/constants'
-import { CustomAlert } from '../../components/common'
-import { useAuthContext } from '../../hooks'
+import { useAuthContext, useAlert } from '../../hooks'
 import SendRecoveryCodeForm from './components/SendRecoveryCodeForm'
 import ConfirmPasswordForm from './components/ConfirmPasswordForm'
+import { getTranslatableErrors } from '../../common/cognitoErrorHandlers'
 
 const SignUp = (props) => {
-  // state
+  // Props and params
+  const { intl } = props
+  const { formatMessage } = intl
+
+  // State
   const [isLoading, setIsLoading] = useState(false)
-  const [error, setError] = useState('')
-  const [email, setEmail] = useState('cristian.ap84@gmail.com')
+  const [email, setEmail] = useState('')
   const [codeSent, setCodeSent] = useState(false)
   const [confirmedPassword, setConfirmedPassword] = useState(false)
 
-  // hooks
+  // Hooks
   const { cognito } = useAuthContext()
+  const { alertSuccess, alertError } = useAlert()
 
-  // handlers
+  // Handlers
   const onForgotPasswordSuccess = (data) => {
     setIsLoading(false)
     setCodeSent(true)
+    alertSuccess(formatMessage({ id: 'recovery_code_sent' }))
   }
 
   const onConfirmPasswordSuccess = (data) => {
     setIsLoading(false)
     setConfirmedPassword(true)
+    alertSuccess(formatMessage({ id: 'password_updated' }))
   }
 
   const onError = (err) => {
     const { code } = err
-    switch (code) {
-      case COGNITO_ERROR_CODES.INVALID_PARAMETER_EXCEPTION:
-        setError({ id: 'cognito_error.invalid_parameter_exception' })
-        break
-      case COGNITO_ERROR_CODES.CODE_MISMATCH_EXCEPTION:
-        setError({ id: 'cognito_error.code_mismatch_exception' })
-        break
-      case COGNITO_ERROR_CODES.EXPIRED_CODE:
-        setError({ id: 'cognito_error.expired_code' })
-        break
-      default:
-        setError({ id: 'common_error.internal_server_error' })
-        break
-    }
+    const translatableError = getTranslatableErrors(code)
+    alertError(formatMessage({ id: translatableError.id }))
     setIsLoading(false)
   }
 
   const onSubmitRecoveryCode = values => {
     const { email } = values
-    setError(false)
     setEmail(email)
     setIsLoading(true)
-
     cognito.forgotPassword(email)
       .then(data => onForgotPasswordSuccess(data))
       .catch(err => onError(err))
@@ -61,7 +52,6 @@ const SignUp = (props) => {
 
   const onSubmitConfirmPassword = values => {
     const { recoveryCode, newPassword } = values
-    setError(false)
     setIsLoading(true)
 
     cognito.confirmPassword(email, recoveryCode, newPassword)
@@ -78,12 +68,6 @@ const SignUp = (props) => {
         <Link className='nav-link' to='/login'>
           <FormattedMessage id='button.go_signin_page' />
         </Link>
-      </div>
-
-      <div className='info pt-3 col-md-12 col-xs-12'>
-        {!isLoading && error && <CustomAlert messages={error} />}
-        {!isLoading && !error && codeSent && !confirmedPassword && <CustomAlert color='success' messages={{ id: 'recovery_code_sent' }} />}
-        {!isLoading && confirmedPassword && <CustomAlert color='success' messages={{ id: 'password_updated' }} />}
       </div>
     </div>
   )

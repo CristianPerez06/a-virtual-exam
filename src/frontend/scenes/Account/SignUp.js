@@ -1,43 +1,34 @@
 import React, { useState } from 'react'
-import { CustomAlert } from '../../components/common'
 import { injectIntl } from 'react-intl'
-import { COGNITO_ERROR_CODES, ROLES } from '../../common/constants'
-import { useAuthContext } from '../../hooks'
+import { ROLES } from '../../common/constants'
+import { useAuthContext, useAlert } from '../../hooks'
 import SignUpForm from './components/SignUpForm'
 import SignUpSuccess from './components/SignUpSuccess'
+import { getTranslatableErrors } from '../../common/cognitoErrorHandlers'
 
 const SignUp = (props) => {
-  // state
+  // Props and params
+  const { intl } = props
+  const { formatMessage } = intl
+
+  // State
   const [isLoading, setIsLoading] = useState(false)
-  const [error, setError] = useState('')
   const [signUpInProgress, setSignUpInProgress] = useState(true)
 
-  // hooks
+  // Hooks
   const { cognito } = useAuthContext()
+  const { alertError } = useAlert()
 
-  // handlers
+  // Handlers
   const onSuccess = (data) => {
-    setError(null)
     setIsLoading(false)
     setSignUpInProgress(false)
   }
 
   const onError = (err) => {
     const { code } = err
-    switch (code) {
-      case COGNITO_ERROR_CODES.USERNAME_EXISTS:
-        setError({ id: 'cognito_error.username_exists' })
-        break
-      case COGNITO_ERROR_CODES.INVALID_PASSWORD_EXCEPTION:
-        setError({ id: 'cognito_error.invalid_parameter_exception' })
-        break
-      case COGNITO_ERROR_CODES.INVALID_PARAMETER_EXCEPTION:
-        setError({ id: 'cognito_error.invalid_parameter_exception' })
-        break
-      default:
-        setError({ id: 'common_error.internal_server_error' })
-        break
-    }
+    const translatableError = getTranslatableErrors(code)
+    alertError(formatMessage({ id: translatableError.id }))
     setIsLoading(false)
   }
 
@@ -68,7 +59,6 @@ const SignUp = (props) => {
       )}
 
       <div className='info pt-3 col-md-12 col-xs-12'>
-        {!isLoading && error && <CustomAlert messages={error} />}
         {!isLoading && !signUpInProgress && <SignUpSuccess />}
       </div>
     </div>

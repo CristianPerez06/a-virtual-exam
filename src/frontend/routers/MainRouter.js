@@ -4,6 +4,8 @@ import { AuthRouter, UnauthRouter } from '../routers'
 import { Loading } from '../components/common'
 import { ACCOUNT_ACTION_TYPES } from '../common/constants'
 import { useAuthContext } from '../hooks'
+import { ToastContainer } from 'react-toastify'
+import 'react-toastify/dist/ReactToastify.css'
 
 const MainRouter = () => {
   // Hooks
@@ -39,6 +41,7 @@ const MainRouter = () => {
   return (
     <Router>
       {user ? <AuthRouter /> : <UnauthRouter />}
+      <ToastContainer />
     </Router>
   )
 }

@@ -1,7 +1,5 @@
 import React from 'react'
 import { Header } from '.'
-import { ToastContainer } from 'react-toastify'
-import 'react-toastify/dist/ReactToastify.css'
 
 const LayoutAuth = (props) => {
   return (
@@ -12,7 +10,6 @@ const LayoutAuth = (props) => {
           {props.children}
         </div>
       </div>
-      <ToastContainer />
     </div>
   )
 }
