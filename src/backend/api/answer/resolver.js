@@ -59,12 +59,17 @@ const resolver = {
       }
 
       // Aggregate
-      const aggregate = [{
-        $match: {
-          exerciseId: new ObjectId(exerciseId),
-          disabled: { $not: { $eq: true } }
+      const aggregate = [
+        {
+          $match: {
+            exerciseId: new ObjectId(exerciseId),
+            disabled: { $not: { $eq: true } }
+          }
+        },
+        {
+          $sort: { name: 1 }
         }
-      }]
+      ]
       debug('Aggregate: ', aggregate)
 
       // Exec

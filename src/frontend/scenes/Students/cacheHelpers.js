@@ -8,7 +8,7 @@ export const syncCacheOnCreate = (cache, item, variables) => {
   // If list is not in cache yet then we don't do anything
   if (!listAssignedExams) return
   // Add new item to list
-  const newList = addItemToList(listAssignedExams.data, item)
+  const newList = addItemToList(listAssignedExams.data, item, true)
   // Update Cache Query
   const listToCache = {
     data: [...newList], count: newList.length, __typename: item.__typename
@@ -23,7 +23,7 @@ export const syncCacheOnDelete = (cache, item, variables) => {
   // If list is not in cache yet then we don't do anything
   if (!listAssignedExams) return
   // Remove item from list
-  const newList = removeItemFromList(listAssignedExams.data, item)
+  const newList = removeItemFromList(listAssignedExams.data, item, true)
   // Update Cache
   const listToCache = {
     data: [...newList], count: newList.length, __typename: item.__typename

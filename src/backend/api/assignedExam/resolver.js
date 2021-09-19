@@ -1,4 +1,3 @@
-const { ApolloError } = require('apollo-server-express')
 const { ObjectId } = require('bson')
 const { BACKEND_ERRORS } = require('../../utilities/constants')
 const { prepSingleResultForUser, prepMultipleResultsForUser } = require('../../utilities/prepResults')
@@ -56,12 +55,6 @@ const resolver = {
       const collection = context.db.collection('assigned-exams')
       const examTemplatesCollection = context.db.collection('exam-templates')
       const coursesCollection = context.db.collection('courses')
-
-      // Look up for duplicates
-      const dup = await collection.findOne({ examTemplateId: objExamTemplateId, idNumber: idNumber })
-      if (dup) {
-        throw new ApolloError(BACKEND_ERRORS.DUPLICATED_ENTITY)
-      }
 
       // Query
       const examTemplate = await examTemplatesCollection.findOne({ _id: objExamTemplateId })

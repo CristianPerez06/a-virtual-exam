@@ -72,6 +72,7 @@ const resolver = {
           }
         ]
       }
+
       if (unitId) {
         aggregate = [
           ...aggregate,
@@ -82,6 +83,14 @@ const resolver = {
           }
         ]
       }
+
+      aggregate = [
+        ...aggregate,
+        {
+          $sort: { name: 1 }
+        }
+      ]
+
       debug('Aggregate: ', aggregate)
 
       // Exec
@@ -101,7 +110,13 @@ const resolver = {
       const collection = context.db.collection('exercises')
 
       // Aggregate
-      const aggregate = getValidExercises(objCourseId)
+      let aggregate = getValidExercises(objCourseId)
+      aggregate = [
+        ...aggregate,
+        {
+          $sort: { name: 1 }
+        }
+      ]
       debug('Aggregate: ', aggregate)
 
       // Exec

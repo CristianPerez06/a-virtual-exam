@@ -58,12 +58,12 @@ const AnswersEditor = (props) => {
 
     isCreating
       ? createAnswer({
-        variables: { name, description, correct, exerciseId: params.exerciseId },
-        update: (cache, result) => {
-          const variables = { exerciseId: params.exerciseId }
-          syncAnswersCacheOnCreate(cache, result.data.createAnswer, variables)
-        }
-      })
+          variables: { name, description, correct, exerciseId: params.exerciseId },
+          update: (cache, result) => {
+            const variables = { exerciseId: params.exerciseId }
+            syncAnswersCacheOnCreate(cache, result.data.createAnswer, variables)
+          }
+        })
       : updateAnswer({
         variables: { id: params.answerId, name, description, correct, exerciseId: params.exerciseId },
         update: (cache, result) => {

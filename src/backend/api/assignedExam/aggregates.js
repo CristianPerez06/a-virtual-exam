@@ -70,6 +70,11 @@ const getAssignedExamsByIdNumberAndCourseId = (idNumber, courseId) => {
         },
         courseName: '$course.name'
       }
+    },
+    {
+      $sort: {
+        created: 1
+      }
     }
   ]
 

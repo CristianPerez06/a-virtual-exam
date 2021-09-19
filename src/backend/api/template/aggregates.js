@@ -7,6 +7,9 @@ const getExamTemplates = (name, courseId, useExerciseValidations = false) => {
       $match: {
         disabled: { $not: { $eq: true } }
       }
+    },
+    {
+      $sort: { name: 1 }
     }
   ]
 

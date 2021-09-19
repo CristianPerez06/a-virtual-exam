@@ -7,12 +7,15 @@ const mapStudents = (users) => {
     return userAttr.Value === ROLES.GUEST ? user : null
   })
 
-  const mappedStudents = filteredUsers.map((user) => {
-    return {
-      value: user.Username,
-      label: user.Attributes.find(x => x.Name === 'name').Value + ' ' + user.Attributes.find(x => x.Name === 'family_name').Value
-    }
-  })
+  const mappedStudents = filteredUsers
+    .map((user) => {
+      return {
+        value: user.Username,
+        label: user.Attributes.find(x => x.Name === 'name').Value + ' ' + user.Attributes.find(x => x.Name === 'family_name').Value
+      }
+    })
+    .sort((a, b) => a.label.localeCompare(b.label))
+
   return mappedStudents
 }
 
