@@ -149,8 +149,8 @@
   "exams_initiated_finalized": "Examenes iniciados o finalizados",
   "exams_finalized": "Examenes finalizados",
   "exams_finalized_successfully": "Examen finalizado correctamente",
-  "exams_passed": "Exam aprobado",
-  "exams_failed": "Exam reprobado",
+  "exams_passed": "Examen aprobado",
+  "exams_failed": "Examen reprobado",
   "exams_manage_per_student": "Administrar examenes por alumno",
   "exam_finish_exam": "Finalizar examen",
 
