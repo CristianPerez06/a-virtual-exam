@@ -25,6 +25,7 @@ export const GET_EXAM = gql`
         }
       }
       score
+      idNumber
     }
   }
 `
