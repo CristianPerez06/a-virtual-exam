@@ -57,7 +57,13 @@ const resolver = {
       const collection = context.db.collection('exam-templates')
 
       // Aggregate
-      const aggregate = getExamTemplates(name, courseId)
+      let aggregate = getExamTemplates(name, courseId)
+      aggregate = [
+        ...aggregate,
+        {
+          $sort: { name: 1 }
+        }
+      ]
       debug('Aggregate: ', aggregate)
 
       // Exec

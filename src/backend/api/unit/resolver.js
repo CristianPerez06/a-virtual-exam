@@ -71,6 +71,14 @@ const resolver = {
           }
         ]
       }
+
+      aggregate = [
+        ...aggregate,
+        {
+          $sort: { name: 1 }
+        }
+      ]
+
       debug('Aggregate: ', aggregate)
 
       // Exec
