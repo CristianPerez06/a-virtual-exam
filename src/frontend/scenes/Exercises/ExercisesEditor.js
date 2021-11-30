@@ -91,17 +91,17 @@ const ExercisesEditor = (props) => {
   }
 
   const onSubmit = (values) => {
-    const { name, courseId, unitId } = values
+    const { name, courseId, unitId, description } = values
     isCreating
       ? createExercise({
-        variables: { name: name, courseId: courseId, unitId: unitId },
+        variables: { name: name, courseId: courseId, unitId: unitId, description: description },
         update: (cache, result) => {
           const variables = { courseId: courseId, unitId: unitId }
           syncCacheOnCreate(cache, result.data.createExercise, variables)
         }
       })
       : updateExercise({
-        variables: { id: params.id, name: name, courseId: courseId, unitId: unitId },
+        variables: { id: params.id, name: name, courseId: courseId, unitId: unitId, description: description },
         update: (cache, result) => {
           const variables = { courseId: courseId, unitId: unitId }
           syncCacheOnUpdate(cache, result.data.updateExercise, variables, variables)
