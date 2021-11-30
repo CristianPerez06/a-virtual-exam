@@ -40,8 +40,8 @@ export const LIST_VALID_EXERCISES = gql`
   }
 `
 export const CREATE_EXERCISE = gql`
-  mutation createExercise($name: String!, $courseId: ID!, $unitId: ID!) {
-    createExercise(name: $name, courseId: $courseId, unitId: $unitId){
+  mutation createExercise($name: String!, $courseId: ID!, $unitId: ID!, $description: String) {
+    createExercise(name: $name, courseId: $courseId, unitId: $unitId, description: $description){
       id
       name
       courseId
@@ -51,8 +51,8 @@ export const CREATE_EXERCISE = gql`
   }
 `
 export const UPDATE_EXERCISE = gql`
-  mutation updateExercise($id: ID!, $name: String!, $courseId: ID!, $unitId: ID!) {
-    updateExercise(id: $id, name: $name, courseId: $courseId, unitId: $unitId){
+  mutation updateExercise($id: ID!, $name: String!, $courseId: ID!, $unitId: ID!, $description: String) {
+    updateExercise(id: $id, name: $name, courseId: $courseId, unitId: $unitId, description: $description){
       id
       name
       courseId

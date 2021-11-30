@@ -140,7 +140,7 @@ const AnswersEditor = (props) => {
                 <span className='text-left pl-1 pb-1'>
                   <FormattedMessage id='answer_description' />
                 </span>
-                <FieldWrapper fieldName='answer-description' placeHolder={formatMessage({ id: 'answer_description' })} />
+                <FieldWrapper fieldName='description' placeHolder={formatMessage({ id: 'answer_description' })} />
               </div>
             </div>
 

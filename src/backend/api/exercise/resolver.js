@@ -170,7 +170,7 @@ const resolver = {
       debug('Running updateExercise mutation with params:', args)
 
       // Args
-      const { id, name, courseId, unitId } = args
+      const { id, name, courseId, unitId, description } = args
 
       // Collection
       const collection = context.db.collection('exercises')
@@ -192,7 +192,8 @@ const resolver = {
           name,
           courseId: new ObjectId(courseId),
           unitId: new ObjectId(unitId),
-          updated: new Date().toISOString()
+          updated: new Date().toISOString(),
+          description
         }
       }
 
