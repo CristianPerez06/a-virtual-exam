@@ -5,10 +5,10 @@
   "main": "server.js",
   "scripts": {
     "front": "react-scripts start",
-    "back": "DEBUG=${DEBUG:=virtual-exam:*} nodemon server",
-    "start": "DEBUG=${DEBUG:=virtual-exam:*} node server",
-    "front-win": "set DEBUG=virtual-exam:* & react-scripts start",
-    "back-win": "set DEBUG=virtual-exam:* & nodemon server",
+    "back": "DEBUG=${DEBUG:=a-virtual-exam:*} nodemon server",
+    "start": "DEBUG=${DEBUG:=a-virtual-exam:*} node server",
+    "front-win": "set DEBUG=a-virtual-exam:* & react-scripts start",
+    "back-win": "set DEBUG=a-virtual-exam:* & nodemon server",
     "build": "react-scripts build",
     "test": "react-scripts test",
     "eject": "react-scripts eject"

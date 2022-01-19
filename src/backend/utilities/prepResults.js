@@ -1,4 +1,4 @@
-const debug = require('debug')('virtual-exam:prepResults')
+const debug = require('debug')('a-virtual-exam:prepResults')
 
 const prepSingleResultForUser = (item) => {
   const { _id, ...rest } = item

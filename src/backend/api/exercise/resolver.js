@@ -5,7 +5,7 @@ const { prepSingleResultForUser, prepMultipleResultsForUser } = require('../../u
 const { maintainIndex } = require('../../indexer')
 const { getValidExercises } = require('./aggregates')
 
-const debug = require('debug')('virtual-exam:exercises-resolver')
+const debug = require('debug')('a-virtual-exam:exercises-resolver')
 
 const init = () => {
   maintainIndex({

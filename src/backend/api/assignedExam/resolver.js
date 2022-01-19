@@ -4,7 +4,7 @@ const { prepSingleResultForUser, prepMultipleResultsForUser } = require('../../u
 const { maintainIndex } = require('../../indexer')
 const { getAssignedExamsByIdNumberAndCourseId } = require('./aggregates')
 
-const debug = require('debug')('virtual-exam:assigned-exams-resolver')
+const debug = require('debug')('a-virtual-exam:assigned-exams-resolver')
 
 const init = () => {
   maintainIndex({

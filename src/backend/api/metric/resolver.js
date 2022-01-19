@@ -1,7 +1,7 @@
 const { prepMultipleResultsForUser } = require('../../utilities/prepResults')
 const { getExamMetrics, getExamsReportData } = require('./aggregates')
 
-const debug = require('debug')('virtual-exam:metric-resolver')
+const debug = require('debug')('a-virtual-exam:metric-resolver')
 
 const resolver = {
   Query: {

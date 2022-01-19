@@ -1,6 +1,6 @@
 const { virtualExamDb } = require('./middleware/mongo')
 
-const debug = require('debug')('virtual-exam:indexer')
+const debug = require('debug')('a-virtual-exam:indexer')
 
 const dropOldIndexes = (db, collectionName, indexPrefix, oldIndexList) => {
   const dbName = db.databaseName

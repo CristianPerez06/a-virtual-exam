@@ -1,7 +1,7 @@
 require('dotenv').config()
 const { MongoClient } = require('mongodb')
 const variables = require('../variables')
-const debug = require('debug')('virtual-exam:mongo')
+const debug = require('debug')('a-virtual-exam:mongo')
 
 const connUrl = variables.connection || variables.defaultConnection
 const dbName = variables.db

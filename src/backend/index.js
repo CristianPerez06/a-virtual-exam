@@ -9,7 +9,7 @@ require('dotenv').config()
 const jwt = require('jsonwebtoken')
 const jtp = require('jwk-to-pem')
 
-const debug = require('debug')('virtual-exam:server')
+const debug = require('debug')('a-virtual-exam:server')
 
 debug('Booting up server')
 

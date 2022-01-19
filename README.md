@@ -1,4 +1,4 @@
-# virtual-exam
+# a-virtual-exam
 Virtual exam is an app that allows students to take their exams online. 
 
 ## Tech stack

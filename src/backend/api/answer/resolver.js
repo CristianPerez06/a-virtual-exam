@@ -4,7 +4,7 @@ const { BACKEND_ERRORS } = require('../../utilities/constants')
 const { prepSingleResultForUser, prepMultipleResultsForUser } = require('../../utilities/prepResults')
 const { maintainIndex } = require('../../indexer')
 
-const debug = require('debug')('virtual-exam:answers-resolver')
+const debug = require('debug')('a-virtual-exam:answers-resolver')
 
 const init = () => {
   maintainIndex({
