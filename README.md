@@ -48,6 +48,4 @@ REACT_APP_API=http://localhost:4000/graphql
 5. Run the server: type `npm run back`
 6. Run the client: type `npm run front`
 
-## Live app
-https://virtual-exam-ucel.herokuapp.com
 
