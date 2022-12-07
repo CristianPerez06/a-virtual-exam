@@ -1,16 +1,38 @@
 # a-virtual-exam
 Virtual exam is an app that allows students to take their exams online. 
 
-## Tech stack
-- ReactJS
-- Bootstrap
-- AWS Cognito
+### Frontend
+
+- Javascript
+- React
+- bootstrap
+- amazon-cognito-identity-js
 - GraphQL
-- Apollo Client 3
-- NodeJS
-- ExpressJS
-- Apollo Server 2
-- MongoDB
+- react-apollo
+- react-chartjs-2
+- react-datepicker
+- react-final-form
+- react-icons
+- react-images-uploading
+- react-intl
+- react-select
+- react-table
+- react-toastify
+- react-timer-hook
+- reactstrap
+
+### Backend
+
+- Javascript
+- Node
+- Express
+- GraphQL
+- apollo-server-express
+- mongodb
+
+### DB
+
+- Mongo DB
 
 ## Installation
 
