@@ -1,10 +1,11 @@
 # a-virtual-exam
-Virtual exam is an app that allows students to take their exams online. 
 
-### Frontend
+A comprehensive online examination system that enables educators to create, manage, and administer digital exams while allowing students to take assessments remotely.
+
+## Tech stack
 
 - Javascript
-- React
+- ReactJS
 - bootstrap
 - amazon-cognito-identity-js
 - GraphQL
@@ -20,26 +21,18 @@ Virtual exam is an app that allows students to take their exams online.
 - react-toastify
 - react-timer-hook
 - reactstrap
-
-### Backend
-
-- Javascript
-- Node
+- NodeJS
 - Express
-- GraphQL
 - apollo-server-express
 - mongodb
 
-### DB
+## Getting Started
 
-- Mongo DB
-
-## Installation
-
-1. Rename the `.env.file` inside root folder to `.env` and fill the empty values:
+1. In the root folder, locate the `.env.file` and rename it to `.env`.
+2. Open the newly renamed `.env` file and provide values for all required environment variables (any fields that are currently empty).
 
 ```
-# ------ SERVER ------ 
+# ------ SERVER ------
 DB=virtual-exam
 COGNITO_CLIENT_ID=
 COGNITO_REGION=
@@ -64,10 +57,8 @@ REACT_APP_BUCKET_S3_REGION=
 #dev
 REACT_APP_API=http://localhost:4000/graphql
 ```
- 
-3. Go to root folder
-4. type `npm install`
-5. Run the server: type `npm run back`
-6. Run the client: type `npm run front`
 
-
+3. Open a terminal and navigate to the root folder of the project.
+4. Install all dependencies by running: `npm install`
+5. Start the backend server by running: `npm run back`
+6. In a new terminal window, start the frontend client by running: `npm run front`
